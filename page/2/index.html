@@ -20,8 +20,8 @@
   <meta name="keywords" content="">
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://kroeseir.github.io/archives/2025/index.html">
+<meta property="og:title" content="是一个一个的cving">
+<meta property="og:url" content="http://kroeseir.github.io/page/2/index.html">
 <meta property="og:site_name" content="是一个一个的cving">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Kroeseir">
@@ -29,7 +29,7 @@
   
   
   
-  <title>归档 - 是一个一个的cving</title>
+  <title>是一个一个的cving</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -94,7 +94,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 100vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -200,13 +200,17 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="落霞光衍斯已去，江畔依旧影无现"></span>
           
         </div>
 
         
       </div>
 
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
       
     </div>
   </div>
@@ -220,54 +224,61 @@
     
       <div class="container nopadding-x-md">
         <div id="board"
-          >
+          style="margin-top: 0">
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
-  <hr>
-  
-  
+
+  <div class="row mx-auto index-card">
     
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/04/07/1/" target="_self">
+          催逝日报-第1期
+        </a>
+      </h2>
+
       
-      <p class="h5">2025</p>
-    
-    <a href="/2025/11/29/15/" class="list-group-item list-group-item-action">
-      <time>11-29</time>
-      <div class="list-group-item-title">第10期</div>
-    </a>
-  
-    
-    <a href="/2025/10/25/14/" class="list-group-item list-group-item-action">
-      <time>10-25</time>
-      <div class="list-group-item-title">第09期-校运会</div>
-    </a>
-  
-    
-    <a href="/2025/10/08/13/" class="list-group-item list-group-item-action">
-      <time>10-08</time>
-      <div class="list-group-item-title">催逝日报-第8期</div>
-    </a>
-  
-    
-    <a href="/2025/07/19/11/" class="list-group-item list-group-item-action">
-      <time>07-19</time>
-      <div class="list-group-item-title">催逝日报-第7期</div>
-    </a>
-  
-    
-    <a href="/2025/06/24/6/" class="list-group-item list-group-item-action">
-      <time>06-24</time>
-      <div class="list-group-item-title">催逝日报-第6期</div>
-    </a>
-  
-</div>
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/07/1/" target="_self">
+        <div>
+          震惊！洗脚盆竟然公然变鸭！……
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-07 00:00" pubdate>
+              2023-04-07
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/News/">#News</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
 
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
 
 
 
@@ -354,7 +365,37 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        jQuery.ajax({
+          type: 'GET',
+          url: 'https://v1.hitokoto.cn/?c=i',
+          headers: {},
+          dataType: 'json',
+          success: function(result) {
+            var apiText;
+            if (result) {
+              var keys = 'hitokoto'.split(',');
+              if (result instanceof Array) {
+                result = result[0];
+              }
+              for (const k of keys) {
+                var value = result[k];
+                if (typeof value === 'string') {
+                  apiText = value;
+                  break;
+                } else if (value instanceof Object) {
+                  result = value;
+                }
+              }
+            }
+            apiText ? typing(apiText) : typing(text);
+          },
+          error: function(xhr, status, error) {
+            if (error) {
+              console.error('Failed to request https://v1.hitokoto.cn/?c=i:', error);
+            }
+            typing(text);
+          }
+        })
       
     })(window, document);
   </script>
